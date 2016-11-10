@@ -51,15 +51,15 @@ def gsmTest(iteration, deviceID):
 
         # Collect GSM information
         print "********************** BEGIN GSM DATA COLLECT FOR CAPE " + str(deviceID) + " --- PASS " + str(iteration) + "\n"
-        gsmData(success)
+        gsmData()
         print "\n********************** END GSM DATA COLLECT --- PASS " + str(iteration) + "\n"
 
         # Reset stdout
         sys.stdout = stdouttemp
-        if success == True:
-            print "TEST PASSED SUCCESSFULLY"
-        else:
-            print "TEST FAILED - check logfile"
+ #       if success == True:
+ #           print "TEST PASSED SUCCESSFULLY"
+ #       else:
+ #           print "TEST FAILED - check logfile"
         gsmStartup()
 
 
