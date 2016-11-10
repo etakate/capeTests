@@ -162,9 +162,6 @@ def gsmData():
         print 'Current configuration settings:' 
         print send('at&v')
 
-        success = True
-        return success
-   
     except Exception as e:
         # Reset stdout
         sys.stdout = stdouttemp        
