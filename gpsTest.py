@@ -9,8 +9,6 @@ import datetime
 import ntplib
 import os
 import pynmea2
-import re
-import six
 import subprocess
 import sys
 import time
