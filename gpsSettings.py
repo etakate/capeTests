@@ -2,6 +2,7 @@
 
 import datetime
 import os
+import re
 import time
 
 # Set GPS baudrate
