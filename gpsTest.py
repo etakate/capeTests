@@ -65,6 +65,7 @@ def gpsTest(iteration, deviceID):
             start = time.time()
             timeout = time.time() + 105 
             gpsp.start()
+            os.system('clear')
             while time.time() < timeout:
                 # Get incoming gps stream
                 report = gpsp.get_current_value()
