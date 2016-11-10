@@ -77,6 +77,7 @@ def gpsData(start, report):
     # print 'EPV: ' , report['epv']
     # print 'EPX: ' , report['epx']
     # print 'Climb: ' , report['climb']
+    # FFR - 'epx' and 'track' are normally stored in report.keys()[0]
 
 # Calculate GPS/NTP difference
 def calc_delta(td):

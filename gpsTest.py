@@ -61,13 +61,13 @@ def gpsTest(iteration, deviceID):
             timeout = time.time() + 75 
             gpsp.start()
             while time.time() < timeout:
-                os.system('clear')
+                # os.system('clear')
+                # Get incoming gps stream
                 report = gpsp.get_current_value()
 
                 if report != '':               
                     try: 
                         # Search for correct GPS info 'bucket'
-                        # FFR - 'epx' and 'track' are normally stored in report.keys()[0]
                         if 'lon' not in report.keys():
                             continue
                         else:
@@ -97,8 +97,8 @@ def gpsTest(iteration, deviceID):
                     print "********************** " + datetime.datetime.now().isoformat() + "\n"
                     gpsData(start, report)
                     gpsTime(report)
-                    print "PASS - GPS lock established"
-                    print "********************** END GPS DATA COLLECT --- PASS " + str(iteration)
+                    print "PASS - GPS lock successfully established"
+                    print "********************** END GPS DATA COLLECT --- PASS " + str(iteration) + "\n"
 
             except Exception as e:
                     print "FAIL - issues occurred with reading GPS data: \n" + str(e)
