@@ -4,6 +4,7 @@ import datetime
 import ntplib
 import os
 import re
+import serial
 import six
 import time
 
@@ -15,6 +16,32 @@ def gpsBaud():
         time.sleep(1)
     except Exception as e:
         print 'Issue occurred setting the baudrate: \n' + str(e)
+
+# Reset GPS chip via binary command(s)
+def gpsReset(bbr):
+    try:
+        gps_com = serial.Serial('/dev/ttyO5', 115200)
+        print 'Resetting GPS...'
+
+        # bbr = 0xffff
+        if bbr == 'cold':
+        print 'Sending cold restart...'
+        gps_com.write('\xb5\x62\x06\x04\x04\x00\xff\xff\x00\x00\x0c\x5d')
+
+        # bbr = 0x0000
+        elif bbr == 'hot':
+            print 'Sending hot restart...'
+            gps_com.write('\xb5\x62\x06\x04\x04\x00\x00\x00\x00\x00\x0e\x64')
+
+        # bbr = 0x0001
+        elif bbr == 'warm':
+            print 'Sending warm restart...'
+            gps_com.write('\xb5\x62\x06\x04\x04\x00\x00\x01\x00\x00\x0f\x67')
+
+        gps_com.close()
+
+except Exception as e:
+    print str(e)
 
 # Modify incoming GPS strings
 def gpsSettings():
@@ -128,6 +155,7 @@ def gpsTime(report):
 
     except Exception as e:
         print 'Something happened during the GPS time check: ' + str(e)
+
 
 
 

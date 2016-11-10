@@ -53,15 +53,21 @@ def gpsTest(iteration, deviceID):
         # print "********************** END GPS SETTINGS VERIFICATION "
         # gpsStartup()
 
+        if str(iteration) == '2':
+            # Run Pass 2
+            bbr = 'cold'
+            gpsReset(bbr)
+        else:
+            pass
+
         # Collect GPS data
         gpsp = gpsPoller()
         try: 
             success = False
             start = time.time()
-            timeout = time.time() + 75 
+            timeout = time.time() + 105 
             gpsp.start()
             while time.time() < timeout:
-                # os.system('clear')
                 # Get incoming gps stream
                 report = gpsp.get_current_value()
 
@@ -121,6 +127,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--iteration', '-it', choices=['1', '2'], help='Specify which iteration of the test you will be running (enter 1 or 2).')
     parser.add_argument('--id', help='Specify the cape ID, which should be the GSM IMEI.')
+ #   parser.add_argument('--bbr', choices=['hot', 'warm', 'cold'], default='cold', help='Specify the BBR sections to clear. Options: hot - warm - cold')
     args = parser.parse_args()
 
     if args.id is None:
@@ -129,4 +136,7 @@ if __name__ == '__main__':
         print("Beginning GPS test...")
         iteration = args.iteration
         deviceID = args.id
+        #if args.bbr is not None:
+        #    bbr = args.bbr
         gpsTest(iteration, deviceID)
+    
