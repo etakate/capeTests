@@ -40,8 +40,8 @@ def gpsReset(bbr):
 
         gps_com.close()
 
-except Exception as e:
-    print str(e)
+    except Exception as e:
+        print "Error resetting GPS chip: " + str(e)
 
 # Modify incoming GPS strings
 def gpsSettings():
