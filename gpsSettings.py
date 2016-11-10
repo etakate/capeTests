@@ -4,16 +4,16 @@ import datetime
 import os
 import time
 
-
+# Set GPS baudrate
+# Generally this is bad practice; gpsd knows what it's doing
 def gpsBaud():
-    # Set new baudrate
     try:
-        os.system('stty speed 115200 </dev/ttyO5')
+        os.system('stty speed 115200 < /dev/ttyO5')
         time.sleep(1)
     except Exception as e:
         print 'Issue occurred setting the baudrate: \n' + str(e)
 
-
+# Modify incoming GPS strings
 def gpsSettings():
     # Talker IDs
     talkers = ['$GL', '$GB', '$GA']
@@ -44,8 +44,8 @@ def gpsSettings():
     except Exception as e:
         print 'Something is wrong with the serial connection to the GPS module. \n' + str(e)
 
-
-def gpsData(report):
+# Generate GPS report data
+def gpsData(start, report):
     # Print report
     stop = time.time()
     print 'Latitude: ' , report['lat']
@@ -75,7 +75,6 @@ def gpsData(report):
     # print 'EPX: ' , report['epx']
     # print 'Climb: ' , report['climb']
 
-
 # Calculate GPS/NTP difference
 def calc_delta(td):
     try:
@@ -90,7 +89,7 @@ def calc_delta(td):
         print str(e)
     return tdelta
 
-
+# Check GPS time against NTP
 def gpsTime(report):
     try:
         os.system('ntpdate -u time.nist.gov')
