@@ -25,8 +25,8 @@ def gpsReset(bbr):
 
         # bbr = 0xffff
         if bbr == 'cold':
-        print 'Sending cold restart...'
-        gps_com.write('\xb5\x62\x06\x04\x04\x00\xff\xff\x00\x00\x0c\x5d')
+            print 'Sending cold restart...'
+            gps_com.write('\xb5\x62\x06\x04\x04\x00\xff\xff\x00\x00\x0c\x5d')
 
         # bbr = 0x0000
         elif bbr == 'hot':
