@@ -35,6 +35,7 @@ def gsmTest(iteration, deviceID):
     capeLogFile = os.path.join(save_path, deviceID + "_test_results.txt")
     with open(capeLogFile, 'a') as results:
         sys.stdout = results
+        success = False
 
         # Check GSM settings & modify if necessary
         print "********************** BEGIN GSM SETTINGS VERIFICATION FOR CAPE " + str(deviceID) + " --- PASS " + str(iteration)
@@ -51,11 +52,15 @@ def gsmTest(iteration, deviceID):
 
         # Collect GSM information
         print "********************** BEGIN GSM DATA COLLECT FOR CAPE " + str(deviceID) + " --- PASS " + str(iteration) + "\n"
-        gsmData()
+        gsmData(success)
         print "\n********************** END GSM DATA COLLECT --- PASS " + str(iteration) + "\n"
 
         # Reset stdout
         sys.stdout = stdouttemp
+        if success == True:
+            print "TEST PASSED SUCCESSFULLY"
+        else:
+            print "TEST FAILED - check logfile"
         gsmStartup()
 
 

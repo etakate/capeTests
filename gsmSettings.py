@@ -146,7 +146,7 @@ def gsmSettingsVerify():
     except Exception as e:
         print "Issues occurred trying to communicate with the GSM; please verify sigma-controller/pppd are down before continuing: \n" + str(e)
 
-def gsmData():
+def gsmData(success):
     try:
         # at+cgsn = IMEI of GSM module
         print 'IMEI: ' + send('at+cgsn')[1]
@@ -161,6 +161,9 @@ def gsmData():
         # at+v = Current configuration settings
         print 'Current configuration settings:' 
         print send('at&v')
+
+        success = True
+        return success
    
     except Exception as e:
         # Reset stdout
