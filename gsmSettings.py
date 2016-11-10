@@ -22,7 +22,8 @@ def send(data):
         com.close()
         return [r for r in resp if r]
     except serial.SerialException as e:
-        return None        
+        print str(e)
+        sys.exit()        
 
 # Activate GPIO22
 def activateGPIO22(cmd):

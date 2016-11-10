@@ -105,10 +105,10 @@ def gpsTest(iteration, deviceID):
     sys.stdout = stdouttemp
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--iteration', '-it', choices=['1', '2'], help='Specify which iteration of the test you will be running (enter "1" or "2").')
+    parser.add_argument('--iteration', '-it', choices=['1', '2'], help='Specify which iteration of the test you will be running (enter 1 or 2).')
     parser.add_argument('--id', help='Specify the cape ID, which should be the GSM IMEI.')
     args = parser.parse_args()
 
