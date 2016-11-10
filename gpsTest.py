@@ -57,8 +57,6 @@ def gpsTest(iteration, deviceID):
             # Run Pass 2
             bbr = 'cold'
             gpsReset(bbr)
-        else:
-            continue
 
         # Collect GPS data
         gpsp = gpsPoller()
