@@ -29,10 +29,6 @@ def gsmTest(iteration, deviceID):
     stdouttemp = sys.stdout
     gsmShutdown()
 
-    # Open serial connection to GSM module
-    com = serial.Serial("/dev/ttyO4", 921600)
-    fd = com.fileno()
-
     # Create GSM log file
     print "Collecting GSM info...."
 
@@ -57,9 +53,6 @@ def gsmTest(iteration, deviceID):
         print "********************** BEGIN GSM DATA COLLECT FOR CAPE " + str(deviceID) + " --- PASS " + str(iteration) + "\n"
         gsmData()
         print "\n********************** END GSM DATA COLLECT --- PASS " + str(iteration) + "\n"
-
-        # Close serial connection to GSM module
-        com.close()
 
         # Reset stdout
         sys.stdout = stdouttemp

@@ -7,23 +7,27 @@ import subprocess
 import sys
 import time
 
-# Open serial connection to GSM module
-com = serial.Serial('/dev/ttyO4', 921600)
-fd = com.fileno()
-
 # Send to GSM module
 def send(data):
-    com.write(data + '\r')
-    resp = []
-    while select.select([fd], [], [], 1.0)[0]:
-        resp.append(os.read(fd, 512))
-    resp = ''.join(resp).split('\r\n')
-    return [r for r in resp if r]
+    # Open serial connection to GSM module
+    com = serial.Serial('/dev/ttyO4', 921600)
+    fd = com.fileno()
+
+    try:
+        com.write(data + '\r')
+        resp = []
+        while select.select([fd], [], [], 1.0)[0]:
+            resp.append(os.read(fd, 512))
+        resp = ''.join(resp).split('\r\n')
+        com.close()
+        return [r for r in resp if r]
+    except serial.SerialException as e:
+        return None        
 
 # Activate GPIO22
 def activateGPIO22(cmd):
     open('/sys/class/gpio/gpio22/value', 'wb').write('1')
-    time.sleep(50)
+    time.sleep(45)
     gpio = subprocess.check_output(cmd, shell=True)
     return gpio
 
@@ -36,7 +40,7 @@ def gsmSettingsInit():
         gpio22 = subprocess.check_output(cmd, shell=True)
         j = 0;
         if '1' not in gpio22:
-            while '1' not in gpio22 and j < 10:
+            while '1' not in gpio22 and j < 5:
                 gpio = activateGPIO22(cmd)
                 gpio22 = gpio
                 j += 1
@@ -154,7 +158,7 @@ def gsmData():
         # at+ccid = CCID of GSM module
         print send('at+ccid?')[1]
         # at+v = Current configuration settings
-        print 'Current configuration settings: \n' 
+        print 'Current configuration settings:' 
         print send('at&v')
    
     except Exception as e:
