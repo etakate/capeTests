@@ -5,7 +5,7 @@ import os
 import time
 
 
-def gpsBaud:
+def gpsBaud():
     # Set new baudrate
     try:
         os.system('stty speed 115200 </dev/ttyO5')
@@ -14,7 +14,7 @@ def gpsBaud:
         print 'Issue occurred setting the baudrate: \n' + str(e)
 
 
-def gpsSettings:
+def gpsSettings():
     # Talker IDs
     talkers = ['$GL', '$GB', '$GA']
     # Header IDs
@@ -122,8 +122,6 @@ def gpsTime(report):
             with open('tmp_gpstd.txt', 'w') as f:
                 f.write('{0}\n'.format(tdelta_pass1))
                 f.close()    
-
-            break
 
     except Exception as e:
         print 'Something happened during the GPS time check: ' + str(e)

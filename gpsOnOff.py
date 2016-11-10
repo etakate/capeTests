@@ -7,7 +7,7 @@ proc1 = "gpsd.socket"
 proc2 = "gpsd.service"
 
 
-def gpsShutdown:
+def gpsShutdown():
     # Shut down gpsd.socket
     print "Shutting down gpsd.socket..."
     try:
@@ -16,7 +16,7 @@ def gpsShutdown:
         tmp = os.popen("ps -Af").read()
         if proc1 not in tmp[:]:
             print "OK - gpsd.socket down"
-         else:
+        else:
             print "FAIL - gpsd.socket still up"
     except Exception as e:
         print "Issues occurred during gpsd.socket shutdown: \n" + str(e)
@@ -34,7 +34,7 @@ def gpsShutdown:
     except Exception as e:
         print "Issues occurred during gpsd.service shutdown: \n" + str(e)
 
-def gpsStartup:
+def gpsStartup():
     # Startup gpsd.socket
     print "Starting up gpsd.socket..."
     try:
@@ -43,7 +43,7 @@ def gpsStartup:
         tmp = os.popen("ps -Af").read()
         if proc1 not in tmp[:]:
             print "FAIL - gpsd.socket still down"
-         else:
+        else:
             print "OK - gpsd.socket back up"
     except Exception as e:
         print "Issues occurred during gpsd.socket shutdown: \n" + str(e)

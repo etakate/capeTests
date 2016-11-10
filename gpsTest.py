@@ -72,7 +72,7 @@ def gpsTest(iteration, deviceID):
                         if 'lon' not in report.keys():
                             continue
                         else:
-                        	print "********************** BEGIN GPS DATA COLLECT FOR CAPE " + str(deviceID) + " --- PASS " + str(iteration)
+                            print "********************** BEGIN GPS DATA COLLECT FOR CAPE " + str(deviceID) + " --- PASS " + str(iteration)
                             print "********************** " + datetime.datetime.now().isoformat() + "\n"
                             # Verify coordinate lock 
                             if report['lon'] != '0.0' and report['lat'] != '0.0':
