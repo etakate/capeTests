@@ -40,6 +40,7 @@ def gsmTest(iteration, deviceID):
     with open(capeLogFile, 'a') as results:
         sys.stdout = results
 
+        # Check GSM settings & modify if necessary
         print "********************** BEGIN GSM SETTINGS VERIFICATION FOR CAPE " + str(deviceID) + " --- PASS " + str(iteration)
         print "********************** " + datetime.datetime.now().isoformat() + "\n"
 
@@ -47,15 +48,15 @@ def gsmTest(iteration, deviceID):
             # Run Pass 1
             gsmSettingsInit()
         else:
-        	# Run Pass 2
+            # Run Pass 2
             gsmSettingsVerify()
 
-        print "********************** END GSM SETTINGS VERIFICATION --- PASS " + str(iteration)
+        print "\n********************** END GSM SETTINGS VERIFICATION --- PASS " + str(iteration) + "\n"
 
         # Collect GSM information
-        print "********************** BEGIN GSM DATA COLLECT FOR CAPE " + str(deviceID) + " --- PASS " + str(iteration)
+        print "********************** BEGIN GSM DATA COLLECT FOR CAPE " + str(deviceID) + " --- PASS " + str(iteration) + "\n"
         gsmData()
-        print "********************** END GSM DATA COLLECT --- PASS " + str(iteration)
+        print "\n********************** END GSM DATA COLLECT --- PASS " + str(iteration) + "\n"
 
         # Close serial connection to GSM module
         com.close()

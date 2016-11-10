@@ -21,7 +21,7 @@ def cellTest(deviceID):
         success = False
 
         print "********************** BEGIN CELL NETWORK DATA COLLECT FOR CAPE " + str(deviceID)
-        print "********************** " + datetime.datetime.now().isoformat()
+        print "********************** " + datetime.datetime.now().isoformat() + "\n"
 
         # Run cell network test
         cmd = shlex.split("ping -c10 google.com")
