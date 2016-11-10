@@ -72,7 +72,7 @@ def gpsTest(iteration, deviceID):
                         if 'lon' not in report.keys():
                             continue
                         else:
-                        	print "********************** BEGIN GPS DATA COLLECT FOR CAPE " + str(deviceID) + " --- PASS " + str(iteration)
+                            print "********************** BEGIN GPS DATA COLLECT FOR CAPE " + str(deviceID) + " --- PASS " + str(iteration)
                             print "********************** " + datetime.datetime.now().isoformat() + "\n"
                             # Verify coordinate lock 
                             if report['lon'] != '0.0' and report['lat'] != '0.0':
@@ -81,19 +81,19 @@ def gpsTest(iteration, deviceID):
                                 gpsTime(report)
                                 print "PASS - GPS lock established"
                             else:
-                            	print "FAIL - No GPS lock established; no GPS data collected."
-                            	break
+                                print "FAIL - No GPS lock established; no GPS data collected."
+                                break
                             print "********************** END GPS DATA COLLECT --- PASS " + str(iteration)
 
                     except Exception as e:
                         print "FAIL - issues occurred with reading GPS data: \n" + str(e)
 
                 else:
-                	print "FAIL - No valid incoming GPS data - check antenna/UFL connection"
-                	sys.exit()
+                    print "FAIL - No valid incoming GPS data - check antenna/UFL connection"
+                    sys.exit()
 
         except Exception as e:
-        	print "FAIL - GPS is down. Time for troubleshooting: \n" + str(e)
+            print "FAIL - GPS is down. Time for troubleshooting: \n" + str(e)
 
 
         gpsp.running = False 
