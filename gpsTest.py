@@ -65,7 +65,7 @@ def gpsTest(iteration, deviceID):
             start = time.time()
             timeout = time.time() + 105 
             gpsp.start()
-            os.system('clear')
+            #os.system('clear')
             while time.time() < timeout:
                 # Get incoming gps stream
                 report = gpsp.get_current_value()
@@ -88,7 +88,8 @@ def gpsTest(iteration, deviceID):
 
                     except Exception as e:
                         print "Issues occurred during GPS testing: \n" + str(e)
-                        break
+                        os.system('clear')
+                        continue
 
                 else:
                     # Reset stdout
