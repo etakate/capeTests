@@ -89,6 +89,7 @@ def gpsTest(iteration, deviceID):
 
                     except Exception as e:
                         print "Issues occurred during GPS testing: \n" + str(e)
+                        break
 
                 else:
                     # Reset stdout
