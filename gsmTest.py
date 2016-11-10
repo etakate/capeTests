@@ -22,11 +22,11 @@ import subprocess
 import signal
 import sys
 
-# Save stdout for later...
-stdouttemp = sys.stdout
 save_path = "/home/sigma/controller/bin/logfiles/"
 
 def gsmTest(iteration, deviceID):
+    # Save stdout for later...
+    stdouttemp = sys.stdout
     gsmShutdown()
 
     # Open serial connection to GSM module
@@ -75,7 +75,7 @@ if __name__=='__main__':
     if args.id is None:
         print("Missing arguments; cannot proceed.")
     else:
-        print("Beginning GSM test..."")
+        print("Beginning GSM test...")
         iteration = args.iteration
         deviceID = args.id
         gsmTest(iteration, deviceID)

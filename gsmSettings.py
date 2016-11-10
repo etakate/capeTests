@@ -23,7 +23,7 @@ def send(data):
 # Activate GPIO22
 def activateGPIO22(cmd):
     open('/sys/class/gpio/gpio22/value', 'wb').write('1')
-    time.sleep(45)
+    time.sleep(50)
     gpio = subprocess.check_output(cmd, shell=True)
     return gpio
 
@@ -36,7 +36,7 @@ def gsmSettingsInit():
         gpio22 = subprocess.check_output(cmd, shell=True)
         j = 0;
         if '1' not in gpio22:
-            while '1' not in gpio22 and j < 5:
+            while '1' not in gpio22 and j < 10:
                 gpio = activateGPIO22(cmd)
                 gpio22 = gpio
                 j += 1

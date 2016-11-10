@@ -9,12 +9,12 @@ import sys
 import shlex
 import subprocess
 
-# Save stdout for later...
-stdouttemp = sys.stdout
 save_path = "/home/sigma/controller/bin/logfiles/"
 
-
 def cellTest(deviceID):
+    # Save stdout for later...
+    stdouttemp = sys.stdout
+
     capeLogFile = os.path.join(save_path, deviceID + "_test_results.txt")
     with open(capeLogFile, 'a') as results:
         sys.stdout = results

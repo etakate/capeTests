@@ -9,8 +9,6 @@ import time
 import urllib
 import urllib2
 
-# Save stdout for later...
-stdouttemp = sys.stdout
 save_path = "/home/sigma/controller/bin/logfiles/"
 download_path = "/home/sigma/controller/bin/download/"
 
@@ -36,6 +34,9 @@ def file_size(file_path):
         return convert_bytes(file_info.st_size)
 
 def bwTest(deviceID):
+    # Save stdout for later...
+    stdouttemp = sys.stdout
+
     capeLogFile = os.path.join(save_path, deviceID + "_test_results.txt")         
     with open(capeLogFile, "a") as results:
 
@@ -83,6 +84,6 @@ if __name__== '__main__':
     if args.id is None:
         print("Missing argument(s); cannot proceed.")
     else:
-        print("Beginning test...")
+        print("Beginning bandwidth test...")
         deviceID = args.id
         bwTest(deviceID)
