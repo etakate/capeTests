@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# Credit for file_size & convert_bytes goes to Rajiv Sharma (found on StackOverflow)
 
 import datetime
 import os
@@ -61,8 +62,12 @@ def bwTest(deviceID):
                 sys.exit()
 
         stop = timer()
- 
-        print "Total download completed in " + str(stop - start) + " seconds"
+        totalT = stop - start 
+        print "Total download completed in " + str(totalT) + " seconds"
+
+        if totalT > 60:
+            print "Bandwidth speed is abnormally slow - check for issues."
+
         print "\n********************** END BANDWIDTH DATA COLLECT \n"
         # Reset stdout
         sys.stdout = stdouttemp
