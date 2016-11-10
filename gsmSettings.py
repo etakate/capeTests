@@ -7,6 +7,8 @@ import subprocess
 import sys
 import time
 
+success = False
+
 # Send to GSM module
 def send(data):
     # Open serial connection to GSM module
@@ -146,7 +148,7 @@ def gsmSettingsVerify():
     except Exception as e:
         print "Issues occurred trying to communicate with the GSM; please verify sigma-controller/pppd are down before continuing: \n" + str(e)
 
-def gsmData(success):
+def gsmData():
     try:
         # at+cgsn = IMEI of GSM module
         print 'IMEI: ' + send('at+cgsn')[1]
