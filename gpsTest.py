@@ -75,6 +75,7 @@ def gpsTest(iteration, deviceID):
 
                 if report != '':               
                     try: 
+                        print report
                         # Search for correct GPS info 'bucket'
                         if 'lon' not in report.keys():
                             continue
