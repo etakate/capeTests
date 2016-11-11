@@ -12,7 +12,7 @@ def gpsShutdown():
     print "Shutting down gpsd.socket..."
     try:
         os.system("systemctl stop " + proc1)
-        time.sleep(10)
+        time.sleep(5)
         tmp = os.popen("ps -Af").read()
         if proc1 not in tmp[:]:
             print "OK - gpsd.socket down"
@@ -25,7 +25,7 @@ def gpsShutdown():
     print "Shutting down gpsd.service..."
     try:
         os.system("systemctl stop " + proc2)
-        time.sleep(10)
+        time.sleep(5)
         tmp = os.popen("ps -Af").read()
         if proc2 not in tmp[:]:
             print "OK - gpsd.service down"
@@ -39,8 +39,8 @@ def gpsStartup():
     print "Starting up gpsd..."
     try:
         os.system("/etc/init.d/gpsd start")
-        timeout = time.time.now() + 45
-        while time.time.now() < timeout:
+        timeout = time.time() + 45
+        while time.time() < timeout:
             time.sleep(5)
             tmp = os.popen("ps -Af").read()
             if proc1 not in tmp[:]:
