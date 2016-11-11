@@ -55,8 +55,10 @@ def gpsTest(iteration, deviceID):
 
         if str(iteration) == '2':
             # Run Pass 2
+            print "Resetting GPS...."
             bbr = 'cold'
             gpsReset(bbr)
+            print "GPS RESET"
 
         # Collect GPS data
         gpsp = gpsPoller()
