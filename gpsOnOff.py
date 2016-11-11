@@ -35,15 +35,18 @@ def gpsShutdown():
         print "Issues occurred during gpsd.service shutdown: \n" + str(e)
 
 def gpsStartup():
-    # Startup gpsd.socket
-    print "Starting up gpsd.socket..."
+    # Startup gpsd
+    print "Starting up gpsd..."
     try:
         os.system("/etc/init.d/gpsd start")
-        time.sleep(10)
-        tmp = os.popen("ps -Af").read()
-        if proc1 not in tmp[:]:
-            print "FAIL - gpsd.socket still down"
-        else:
-            print "OK - gpsd.socket back up"
+        timeout = time.time.now() + 45
+        while time.time.now() < timeout:
+            time.sleep(5)
+            tmp = os.popen("ps -Af").read()
+            if proc1 not in tmp[:]:
+                print "FAIL - gpsd still down"
+            else:
+                print "OK - gpsd back up"
+                break
     except Exception as e:
-        print "Issues occurred during gpsd.socket shutdown: \n" + str(e)
+        print "Issues occurred during gpsd startup: \n" + str(e)

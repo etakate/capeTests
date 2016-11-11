@@ -39,6 +39,14 @@ class gpsPoller(threading.Thread):
 
 def gpsTest(iteration, deviceID):
 
+    # Pass 2 Init sequence
+    if str(iteration) == '2':
+        gpsShutdown()
+        bbr = 'cold'
+        gpsReset(bbr)
+        time.sleep(30)
+        gpsStartup()
+
     # Create GPS log file
     print "Collecting GPS info...."
 
@@ -53,12 +61,6 @@ def gpsTest(iteration, deviceID):
         # print "********************** END GPS SETTINGS VERIFICATION "
         # gpsStartup()
 
-        if str(iteration) == '2':
-            # Run Pass 2
-            print "Resetting GPS...."
-            bbr = 'cold'
-            gpsReset(bbr)
-            print "GPS RESET"
 
         # Collect GPS data
         gpsp = gpsPoller()

@@ -8,8 +8,8 @@ import serial
 import six
 import time
 
-# Set GPS baudrate
-# Generally this is bad practice; gpsd knows what it's doing
+# Set GPS baudrate if needed
+# Generally this is bad practice & unnecessary; gpsd knows what it's doing
 def gpsBaud():
     try:
         os.system('stty speed 115200 < /dev/ttyO5')
@@ -21,7 +21,7 @@ def gpsBaud():
 def gpsReset(bbr):
     try:
         gps_com = serial.Serial('/dev/ttyO5', 115200)
-        print 'Resetting GPS...'
+        print 'Resetting GPS....'
 
         # bbr = 0xffff
         if bbr == 'cold':
@@ -38,6 +38,8 @@ def gpsReset(bbr):
             print 'Sending warm restart...'
             gps_com.write('\xb5\x62\x06\x04\x04\x00\x00\x01\x00\x00\x0f\x67')
 
+        print 'OK - GPS reset'
+        
         gps_com.close()
 
     except Exception as e:
