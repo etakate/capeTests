@@ -147,7 +147,7 @@ def gpsTime(report, iteration):
         if isinstance(tdelta, six.string_types):
             print 'GPS time differs from NTP time by minutes or hours [' + tdelta + ']. Difference is not acceptable, something needs help.'
         else:
-            print 'GPS time differs from NTP time by ' + str(tdelta) + ' seconds. Difference is within acceptable range.'
+            print 'GPS time differs from NTP time by ' + str(tdelta) + ' seconds.'
 
         if str(iteration) == '1':
             gpsTimeInit(tdelta)

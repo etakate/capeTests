@@ -5,7 +5,7 @@ import time
 
 proc1 = "gpsd.socket"
 proc2 = "gpsd.service"
-proc3 = "*gpsd*"
+proc3 = "/usr/sbin/gpsd -N /dev/ttyO5"
 
 
 def gpsShutdown():
@@ -44,7 +44,6 @@ def gpsStartup():
         while time.time() < timeout:
             time.sleep(5)
             tmp = os.popen("ps -Af").read()
-            print tmp
             if proc3 not in tmp[:]:
                 print "FAIL - gpsd still down"
             else:
