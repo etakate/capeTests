@@ -75,7 +75,6 @@ def gpsTest(iteration, deviceID):
 
                 if report != '':               
                     try: 
-                        print report
                         # Search for correct GPS info 'bucket'
                         if 'lon' not in report.keys():
                             continue
@@ -83,20 +82,19 @@ def gpsTest(iteration, deviceID):
                             # Verify coordinate lock 
                             if report['lon'] != '0.0' and report['lat'] != '0.0':
                                 # Verify UTC time is established
-                                if report['time']:
-                                    success = True
-                                else:
-                                    continue
+                                #if report['time']:
+                               success = True
+                               break
                             else:
-                                # Reset stdout
-                                sys.stdout = stdouttemp
-                                print "FAIL - No GPS lock established; no GPS data collected."
-                                sys.exit()
-                            break
+                                continue
 
                     except Exception as e:
-                        print "Issues occurred during GPS testing: \n" + str(e)
-                        break
+                        # Reset stdout
+                        sys.stdout = stdouttemp
+                        print "FAIL - No GPS lock established; no GPS data collected."
+                        sys.exit()
+                        #print "Issues occurred during GPS testing: \n" + str(e)
+                        #break
 
                 else:
                     # Reset stdout
