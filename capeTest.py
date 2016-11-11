@@ -7,13 +7,19 @@ from bwTest import *
 
 
 def fullTest1(iteration, deviceID):
+    print "\nStarting GSM test...."
     gsmTest(iteration, deviceID)
+    print "\nStarting GPS test...."
     gpsTest(iteration, deviceID)
 
 def fullTest2(iteration, deviceID):
+    print "\nStarting GSM test...."
     gsmTest(iteration, deviceID)
+    print "\nStarting GPS test...."
     gpsTest(iteration, deviceID)
+    print "\nStarting cell network test...."
     cellTest(deviceID)
+    print "\nStarting bandwidth test...."
     bwTest(deviceID)
 
 
