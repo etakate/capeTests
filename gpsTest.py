@@ -82,9 +82,11 @@ def gpsTest(iteration, deviceID):
                             # Verify coordinate lock 
                             if report['lon'] != '0.0' and report['lat'] != '0.0':
                                 # Verify UTC time is established
-                                #if report['time']:
-                               success = True
-                               break
+                                if report['time']:
+                                    success = True
+                                    break
+                                else:
+                                    continue
                             else:
                                 continue
 
