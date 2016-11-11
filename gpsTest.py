@@ -79,24 +79,32 @@ def gpsTest(iteration, deviceID):
                         if 'lon' not in report.keys():
                             continue
                         else:
-                            # Verify coordinate lock 
-                            if report['lon'] != '0.0' and report['lat'] != '0.0':
-                                # Verify UTC time is established
-                                if report['time']:
-                                    success = True
-                                    break
+                            try:
+                                # Verify coordinate lock 
+                                if report['lon'] != '0.0' and report['lat'] != '0.0':
+                                    # Verify UTC time is established
+                                    try:
+                                        if 'time' in report.keys():
+                                            success = True
+                                            break
+                                        else:
+                                            continue
+                                    except Exception as e:
+                                        sys.stdout = stdouttemp
+                                        print "Problems with UTC TIME"
+                                        sys.exit()          
                                 else:
                                     continue
-                            else:
-                                continue
+
+                            except Exception as e:
+                                sys.stdout = stdouttemp
+                                print "No GPS lock established; no GPS data collected."
+                                sys.exit()
 
                     except Exception as e:
-                        # Reset stdout
                         sys.stdout = stdouttemp
-                        print "FAIL - No GPS lock established; no GPS data collected."
+                        print "FAIL - incoming GPS stream issues." 
                         sys.exit()
-                        #print "Issues occurred during GPS testing: \n" + str(e)
-                        #break
 
                 else:
                     # Reset stdout
