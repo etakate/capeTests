@@ -38,8 +38,9 @@ def gpsReset(bbr):
             print 'Sending warm restart...'
             gps_com.write('\xb5\x62\x06\x04\x04\x00\x00\x01\x00\x00\x0f\x67')
 
+        time.sleep(10)
         print 'OK - GPS reset'
-        
+
         gps_com.close()
 
     except Exception as e:
@@ -100,7 +101,8 @@ def gpsData(start, report):
 
     elapsed = stop - start
     print "Time to Positioning Lock: ", elapsed , " seconds"
-
+    print "PASS - GPS lock successfully established"
+    
     # Additional GPS fields available:
     # print 'EPS: ' , report['eps']
     # print 'EPV: ' , report['epv']
@@ -140,23 +142,39 @@ def gpsTime(report):
 
         # td = timedelta object
         td = n - g
-        tdelta_pass1 = calc_delta(td)
+        tdelta = calc_delta(td)
 
-        if isinstance(tdelta_pass1, six.string_types):
-            print 'GPS time differs from NTP time by minutes or hours [' + tdelta_pass1 + ']. Difference is not acceptable, something needs help.'
+        if isinstance(tdelta, six.string_types):
+            print 'GPS time differs from NTP time by minutes or hours [' + tdelta + ']. Difference is not acceptable, something needs help.'
         else:
-            if -5 > tdelta_pass1 or tdelta_pass1 > 5:
-                print 'GPS time differs from NTP time by ' + str(tdelta_pass1) + ' seconds. Difference is not acceptable.'
-            else:
-                print 'GPS time differs from NTP time by ' + str(tdelta_pass1) + ' seconds. Difference is within acceptable range.'
+            print 'GPS time differs from NTP time by ' + str(tdelta) + ' seconds. Difference is within acceptable range.'
 
-            # Write GPS time test pass 1 results for later comparison
-            with open('tmp_gpstd.txt', 'w') as f:
-                f.write('{0}\n'.format(tdelta_pass1))
-                f.close()    
+        return tdelta
 
     except Exception as e:
         print 'Something happened during the GPS time check: ' + str(e)
+
+# Write GPS time results (test iteration 1) for later comparison
+def gpsTimeInit(tdelta):
+    try:
+        with open('tmp_gpst.txt', 'w') as f:
+            f.write('{0}\n'.format(tdelta))
+            f.close()
+
+    except Exception as e:
+        print 'Issues occurred writing iteration 1 time data to temp file: ' + str(e)
+
+# Compare GPS time test iteration 1 to iteration 2
+def gpsTimeVerify(tdelta):
+        t1 = [line.rstrip('\n') for line in open('tmp_gpst.txt')]
+        td_t1 = t1[0]
+        td_diff = float(td_t2) - float(td_t1)
+        print '\nGPS time offset difference between iteration 1 and iteration 2: ' + str(td_diff)
+        if -3.0 > td_diff or td_diff > 3.0:
+            print td_diff
+            print "GPS time offset differs significantly from iteration 1."
+        else:
+            print 'GPS time offset OK.'
 
 
 

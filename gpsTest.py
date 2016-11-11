@@ -44,7 +44,6 @@ def gpsTest(iteration, deviceID):
         gpsShutdown()
         bbr = 'cold'
         gpsReset(bbr)
-        time.sleep(30)
         gpsStartup()
 
     # Create GPS log file
@@ -105,9 +104,14 @@ def gpsTest(iteration, deviceID):
                 if success == True:
                     print "********************** BEGIN GPS DATA COLLECT FOR CAPE " + str(deviceID) + " --- PASS " + str(iteration)
                     print "********************** " + datetime.datetime.now().isoformat() + "\n"
+
                     gpsData(start, report)
                     gpsTime(report)
-                    print "PASS - GPS lock successfully established"
+
+                    if str(iteration) == '1':
+                        gpsTimeInit(tdelta)
+                    else:
+                        gpsTimeVerify(tdelta)
                     print "********************** END GPS DATA COLLECT --- PASS " + str(iteration) + "\n"
 
             except Exception as e:
@@ -115,7 +119,6 @@ def gpsTest(iteration, deviceID):
 
         except Exception as e:
             print "MAJOR FAIL - GPS is down. Time for troubleshooting: \n" + str(e)
-
 
         gpsp.running = False 
         gpsp.join()
