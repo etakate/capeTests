@@ -66,7 +66,7 @@ def gpsTest(iteration, deviceID):
         try: 
             success = False
             start = time.time()
-            timeout = time.time() + 105 
+            timeout = time.time() + 200 
             gpsp.start()
             os.system('clear')
             while time.time() < timeout:
@@ -81,7 +81,11 @@ def gpsTest(iteration, deviceID):
                         else:
                             # Verify coordinate lock 
                             if report['lon'] != '0.0' and report['lat'] != '0.0':
-                                success = True
+                                # Verify UTC time is established
+                                if report['time']:
+                                    success = True
+                                else:
+                                    continue
                             else:
                                 # Reset stdout
                                 sys.stdout = stdouttemp

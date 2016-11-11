@@ -83,10 +83,7 @@ def gpsData(start, report):
     stop = time.time()
     print 'Latitude: ' , report['lat']
     print 'Longitude: ' , report['lon']
-    if 'time' not in report.keys():
-        print 'Time UTC: [not reported]'
-    else:
-        print 'Time UTC: ' , report['time']
+    print 'Time UTC: ' , report['time']
     if 'alt' not in report.keys():
         print 'Altitude (m): [not reported]'
     else:
