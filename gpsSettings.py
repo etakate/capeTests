@@ -171,7 +171,7 @@ def gpsTimeInit(tdelta):
 def gpsTimeVerify(tdelta):
         t1 = [line.rstrip('\n') for line in open('tmp_gpst.txt')]
         td_t1 = t1[0]
-        td_diff = float(td_t2) - float(td_t1)
+        td_diff = float(tdelta) - float(td_t1)
         print '\nGPS time offset difference between iteration 1 and iteration 2: ' + str(td_diff)
         if -3.0 > td_diff or td_diff > 3.0:
             print td_diff
