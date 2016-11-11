@@ -83,7 +83,10 @@ def gpsData(start, report):
     stop = time.time()
     print 'Latitude: ' , report['lat']
     print 'Longitude: ' , report['lon']
-    print 'Time UTC: ' , report['time']
+    if 'time' not in report.keys():
+        print 'Time UTC: [not reported]'
+    else:
+        print 'Time UTC: ' , report['time']
     if 'alt' not in report.keys():
         print 'Altitude (m): [not reported]'
     else:
@@ -92,8 +95,14 @@ def gpsData(start, report):
         print 'Speed (m/s): [not reported]'
     else:
         print 'Speed (m/s): ' , report['speed']
-    print 'Track: ' , report['track']
-    print 'Mode: ' , report['mode']
+    if 'track' not in report.keys():
+        print 'Track: [not reported]'
+    else:
+        print 'Track: ' , report['track']
+    if 'mode' not in report.keys():
+        print 'Mode: [not reported]'
+    else:
+        print 'Mode: ' , report['mode']
     if 'ept' not in report.keys():
         print 'EPT: [not reported]'
     else:
