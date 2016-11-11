@@ -106,16 +106,16 @@ def gpsTest(iteration, deviceID):
                     print "********************** " + datetime.datetime.now().isoformat() + "\n"
 
                     gpsData(start, report)
-                    gpsTime(report)
+                    gpsTime(report, iteration)
 
-                    if str(iteration) == '1':
-                        gpsTimeInit(tdelta)
-                    else:
-                        gpsTimeVerify(tdelta)
+                    # if str(iteration) == '1':
+                    #     gpsTimeInit(tdelta)
+                    # else:
+                    #     gpsTimeVerify(tdelta)
                     print "********************** END GPS DATA COLLECT --- PASS " + str(iteration) + "\n"
 
             except Exception as e:
-                    print "FAIL - issues occurred with reading GPS data: \n" + str(e)
+                    print "FAIL - issues occurred with GPS data collection: \n" + str(e)
 
         except Exception as e:
             print "MAJOR FAIL - GPS is down. Time for troubleshooting: \n" + str(e)

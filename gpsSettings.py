@@ -102,7 +102,7 @@ def gpsData(start, report):
     elapsed = stop - start
     print "Time to Positioning Lock: ", elapsed , " seconds"
     print "PASS - GPS lock successfully established"
-    
+
     # Additional GPS fields available:
     # print 'EPS: ' , report['eps']
     # print 'EPV: ' , report['epv']
@@ -125,7 +125,7 @@ def calc_delta(td):
     return tdelta
 
 # Check GPS time against NTP
-def gpsTime(report):
+def gpsTime(report, iteration):
     try:
         os.system('ntpdate -u time.nist.gov')
         gps = report['time']
@@ -149,7 +149,10 @@ def gpsTime(report):
         else:
             print 'GPS time differs from NTP time by ' + str(tdelta) + ' seconds. Difference is within acceptable range.'
 
-        return tdelta
+        if str(iteration) == '1':
+            gpsTimeInit(tdelta)
+        else:
+            gpsTimeVerify(tdelta)
 
     except Exception as e:
         print 'Something happened during the GPS time check: ' + str(e)
