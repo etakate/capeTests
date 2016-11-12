@@ -1,7 +1,8 @@
 Test suite for use with BeagleBoneBlack & GSM/GPS-enabled cape.
 
 
-capeTest.py	- Entire test suite in one script [WIP]
+capeTest.py	- Entire test suite in one script
+		- Options: --id, --iteration [1] or [2]
 
 bwTest.py	- Test bandwidth via download action
 		- Options: --id
@@ -9,10 +10,10 @@ bwTest.py	- Test bandwidth via download action
 cellTest.py	- Test cell network connection
 		- Options: --id
 
-gpsTest.py [1]	- Test GPS chip [WIP]
+gpsTest.py [1]	- Test GPS chip
 		- Options: --id, --iteration [1]
 
-gpsTest.py [2] - Test GPS chip [WIP]
+gpsTest.py [2] - Test GPS chip
 		- Options: --id, --iteration [2]
 
 gsmTest.py [1]	- Verify GSM module settings have been set correctly; update settings if necessary; record all settings

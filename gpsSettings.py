@@ -180,7 +180,6 @@ def gpsTimeVerify(tdelta):
         td_diff = float(tdelta) - float(td_t1)
         print '\nGPS time offset difference between iteration 1 and iteration 2: ' + str(td_diff)
         if -3.0 > td_diff or td_diff > 3.0:
-            print td_diff
             print "GPS time offset differs significantly from iteration 1."
         else:
             print 'GPS time offset OK.'
