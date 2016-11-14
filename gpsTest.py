@@ -126,10 +126,14 @@ def gpsTest(iteration, deviceID):
                     # else:
                     #     gpsTimeVerify(tdelta)
                     print "********************** END GPS DATA COLLECT --- PASS " + str(iteration) + "\n"
+                    
+                    sys.stdout = stdouttemp
+                    print "TEST PASSED SUCCESSFULLY"
+
                 else:
-                    # Reset stdout
                     sys.stdout = stdouttemp
                     print "MAJOR FAIL - Something is very wrong with the GPS, check the chip."
+                    sys.exit()
 
             except Exception as e:
                     print "FAIL - issues occurred with GPS data collection: \n" + str(e)
