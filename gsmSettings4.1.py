@@ -10,7 +10,7 @@ import time
 # Send to GSM module
 def send(data):
     # Open serial connection to GSM module
-    com = serial.Serial('/dev/ttyO4', 230400)
+    com = serial.Serial('/dev/ttyO4', 921600)
     fd = com.fileno()
 
     try:
@@ -63,10 +63,10 @@ def gsmSettingsInit():
 
     # Check baud rate
     print "Verifying 'at+ipr' set..."
-    if '230400' not in send('at+ipr?')[1]:
+    if '921600' not in send('at+ipr?')[1]:
         try:
-            send('at+ipr=230400')
-            print "IPR was not set correctly; it's fixed now. Current value = 230400 \n"
+            send('at+ipr=921600')
+            print "IPR was not set correctly; it's fixed now. Current value = 921600 \n"
         except Exception as e:
             print "TEST FAILED - Attempted to set IPR - something happened: \n" + str(e)
             # Reset stdout
@@ -74,7 +74,7 @@ def gsmSettingsInit():
             print "TEST FAILED - Attempted to set IPR - something happened: \n" + str(e)
             sys.exit()
 
-    elif '230400' in send('at+ipr?')[1]:
+    elif '921600' in send('at+ipr?')[1]:
         print 'IPR - OK'
     else:
         # FAIL LOUDLY
@@ -130,7 +130,7 @@ def gsmSettingsVerify():
 
     try:
         # at+ipr = Baudrate of DCE
-        if '230400' in send('at+ipr?')[1] and send('at&v')[3] == send('at&v')[11]:
+        if '921600' in send('at+ipr?')[1] and send('at&v')[3] == send('at&v')[11]:
             gsm_pass2 = 'Profile Saved'        
         else:
             gsm_pass2 = 'Profile NOT Saved'
