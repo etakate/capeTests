@@ -133,8 +133,9 @@ def calc_delta(td):
 # Check GPS time against NTP
 def gpsTime(report, iteration):
     try:
-        os.system('service ntp stop')
-        os.system('ntpd -gq')
+#        os.system('service ntp stop')
+#        os.system('ntpd -gq')
+        os.system('ntpdate -u time.nist.gov')
         gps = report['time']
         cmd = datetime.datetime.now()
         gt = re.split("T|Z", str(gps))
