@@ -48,19 +48,15 @@ def gsmShutdown():
         print 'Issues occurred shutting down pppd: \n' + str(e)
 
 
-def gsmStartup(fwVer):
+def gsmStartup():
     # Restart sigma-controller.py
     print 'Turning on sigma-controller...'
     try:
-        if fwVer == '4.1':
-            os.system(proc1 + ' --provider att --ppp-baud 921600 start')
-        else:
-            os.system(proc1 + ' --provider att --ppp-baud 230400 start')
-            
-        tmp = os.popen('ps -Af').read()             
+        os.system(proc1 + ' --provider att --ppp-baud 230400 start')
+        tmp = os.popen('ps -Af').read() 
         if proc1 not in tmp[:]: 
             newprocess = "nohup python %s &" % (proc1)
-            os.system(proc1 + ' --provider att start')  
+            os.system(proc1 + ' start')  
             time.sleep(3)
         else:
             print 'sigma-controller.py is back up'

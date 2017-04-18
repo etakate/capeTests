@@ -7,8 +7,6 @@ import subprocess
 import sys
 import time
 
-stdouttemp = sys.stdout
-
 # Send to GSM module
 def send(data):
     # Open serial connection to GSM module

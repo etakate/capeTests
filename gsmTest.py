@@ -24,7 +24,7 @@ import sys
 
 save_path = "/home/sigma/controller/bin/logfiles/"
 
-def gsmTest(iteration, deviceID):
+def gsmTest(iteration, deviceID, fwVer):
     # Save stdout for later...
     stdouttemp = sys.stdout
     gsmShutdown()
@@ -60,7 +60,7 @@ def gsmTest(iteration, deviceID):
  #           print "TEST PASSED SUCCESSFULLY"
  #       else:
  #           print "TEST FAILED - check logfile"
-        gsmStartup()
+        gsmStartup(fwVer)
 
 
 if __name__=='__main__':
@@ -68,6 +68,7 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--iteration', '-it', choices=['1', '2'], help='Specify which iteration of the test you will be running (enter 1 or 2).')
     parser.add_argument('--id', help='Specify the cape ID, which should be the GSM IMEI.')
+    parser.add_argument('--firmware', '-fw', help='Specify the firmware version (enter 4.1 or 4.4.')
     args = parser.parse_args()
 
     if args.id is None:
@@ -76,5 +77,6 @@ if __name__=='__main__':
         print("Beginning GSM test...")
         iteration = args.iteration
         deviceID = args.id
-        gsmTest(iteration, deviceID)
+        fwVer = args.firmware
+        gsmTest(iteration, deviceID, fwVer)
 

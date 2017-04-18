@@ -133,9 +133,10 @@ def calc_delta(td):
 # Check GPS time against NTP
 def gpsTime(report, iteration):
     try:
-#        os.system('service ntp stop')
-#        os.system('ntpd -gq')
-        os.system('ntpdate -u time.nist.gov')
+        os.system('service ntp stop')
+        os.system('ntpd -gq')
+        os.system('service ntp start')
+#        os.system('ntpdate -u time.nist.gov')
         gps = report['time']
         cmd = datetime.datetime.now()
         gt = re.split("T|Z", str(gps))
@@ -149,11 +150,15 @@ def gpsTime(report, iteration):
         n = datetime.datetime.strptime(ntptime[1], '%H:%M:%S.%f')
 
         # td = timedelta object
-        td = n - g
-        tdelta = calc_delta(td)
+        if g > n:
+            td = g - n
+            tdelta = calc_delta(td)
+        else:
+            td = n - g
+            tdelta = calc_delta(td)
 
         if isinstance(tdelta, six.string_types):
-            print 'GPS time differs from NTP time by minutes or hours [' + tdelta + ']. Difference is not acceptable, something needs help.'
+            print 'GPS time differs from NTP time by minutes or hours [' + str(tdelta) + ']. Difference is not acceptable, something needs help.'
         else:
             print 'GPS time differs from NTP time by ' + str(tdelta) + ' seconds.'
 
