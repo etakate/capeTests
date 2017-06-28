@@ -60,7 +60,7 @@ def gsmTest(iteration, deviceID, fwVer):
  #           print "TEST PASSED SUCCESSFULLY"
  #       else:
  #           print "TEST FAILED - check logfile"
-        gsmStartup(fwVer)
+        gsmStartup()
 
 
 if __name__=='__main__':

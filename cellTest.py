@@ -14,6 +14,9 @@ save_path = "/home/sigma/controller/bin/logfiles/"
 def cellTest(deviceID):
     # Save stdout for later...
     stdouttemp = sys.stdout
+    os.system('sigma-controller.py stop')
+    os.system('sigma-controller.py --provider att start')
+    time.sleep(60)
 
     capeLogFile = os.path.join(save_path, deviceID + "_test_results.txt")
     with open(capeLogFile, 'a') as results:

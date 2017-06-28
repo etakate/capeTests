@@ -6,6 +6,7 @@ import os
 import re
 import serial
 import six
+import sys
 import time
 
 # Set GPS baudrate if needed
@@ -134,9 +135,9 @@ def calc_delta(td):
 def gpsTime(report, iteration):
     try:
         os.system('service ntp stop')
-        os.system('ntpd -gq')
+#        os.system('ntpd -gq')
+        os.system('ntpdate -u 129.6.15.28')
         os.system('service ntp start')
-#        os.system('ntpdate -u time.nist.gov')
         gps = report['time']
         cmd = datetime.datetime.now()
         gt = re.split("T|Z", str(gps))
@@ -162,13 +163,14 @@ def gpsTime(report, iteration):
         else:
             print 'GPS time differs from NTP time by ' + str(tdelta) + ' seconds.'
 
-        if str(iteration) == '1':
-            gpsTimeInit(tdelta)
-        else:
-            gpsTimeVerify(tdelta)
+#        if str(iteration) == '1':
+#            gpsTimeInit(tdelta)
+#        else:
+#            gpsTimeVerify(tdelta)
 
     except Exception as e:
         print 'Something happened during the GPS time check: ' + str(e)
+        sys.exit()
 
 # Write GPS time results (test iteration 1) for later comparison
 def gpsTimeInit(tdelta):
@@ -179,6 +181,7 @@ def gpsTimeInit(tdelta):
 
     except Exception as e:
         print 'Issues occurred writing iteration 1 time data to temp file: ' + str(e)
+        sys.exit()
 
 # Compare GPS time test iteration 1 to iteration 2
 def gpsTimeVerify(tdelta):

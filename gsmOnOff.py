@@ -12,7 +12,7 @@ def gsmShutdown():
     print 'Shutting down sigma-controller...'
     try:
         os.system(proc1 + ' stop')
-        time.sleep(5)
+        time.sleep(10)
         tmp = os.popen('ps -Af').read() 
         if proc1 not in tmp[:]: 
             print 'OK'
@@ -48,14 +48,16 @@ def gsmShutdown():
         print 'Issues occurred shutting down pppd: \n' + str(e)
 
 
-def gsmStartup(fwVer):
+def gsmStartup():
     # Restart sigma-controller.py
     print 'Turning on sigma-controller...'
     try:
-        if fwVer == '4.1':
-            os.system(proc1 + ' --provider att --ppp-baud 921600 start')
-        else:
-            os.system(proc1 + ' --provider att --ppp-baud 230400 start')
+        os.system('sigma-controller.py --provider att start')
+
+#        if fwVer == '4.1':
+#            os.system(proc1 + ' --provider att --ppp-baud 921600 start')
+#        else:
+#            os.system(proc1 + ' --provider att --ppp-baud 230400 start')
             
         tmp = os.popen('ps -Af').read()             
         if proc1 not in tmp[:]: 
